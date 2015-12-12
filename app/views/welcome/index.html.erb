@@ -1,0 +1,10 @@
+<h2>Counter: <%= @counter.name %></h2>
+<p>The time is now: <%= Time.now %>, there are <%= @events_count %> events<% if @last != nil %>, last <%= time_ago_in_words @last.timestamp %> ago<% end %></p>
+<% if @last == nil or @last.timestamp < @counter.cooldown.minutes.ago %>
+<%= button_to "Add", {action: 'event', user: @user.name, counter: @counter.name}, {class: 'button'} %>
+<% else %>
+<div data-alert class="alert-box info">In cooldown</div>
+<% end %>
+<% if flash[:message] %>
+<div data-alert class="alert-box alert round"><%= flash[:message] %></div>
+<% end %>

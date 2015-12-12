@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 
+  name: MyString
+  cooldown: 
+  owner_id: 
+
+two:
+  id: 
+  name: MyString
+  cooldown: 
+  owner_id: 

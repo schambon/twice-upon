@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 
+  counter_id: 
+  timestamp: 2015-12-12 12:19:36
+
+two:
+  id: 
+  counter_id: 
+  timestamp: 2015-12-12 12:19:36
