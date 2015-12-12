@@ -3,7 +3,8 @@ class WelcomeController < ApplicationController
   def index
     @user = User.find(1)
     @counter = @user.counters.first
-    @events_count = @counter.events.size
+    @events_count = Event.where(counter: @counter, timestamp: Time.now.midnight..Time.now).count
+    # @events_count = @counter.events.size
     @last = @counter.events.last
   end
 
