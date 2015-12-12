@@ -1,6 +1,6 @@
 <% content_for :title, @counter.name + " counter" %>
 <h2><%= @counter.name %> counter</h2>
-<p>There are <%= @events_count %> events today<% if @last != nil %>, the last <%= time_ago_in_words @last.timestamp %> ago<% end %></p>
+<p>There are <%= @events_count %> events today<% if @last != nil %>; the latest event is from <%= time_ago_in_words @last.timestamp %> ago<% end %></p>
 <% if @last == nil or @last.timestamp < @counter.cooldown.minutes.ago %>
 <%= button_to "Add", {action: 'event', user: @user.name, counter: @counter.name}, {class: 'button'} %>
 <% else %>
