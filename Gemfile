@@ -29,6 +29,11 @@ gem 'rails_12factor', group: :production
 # Use Foundation for CSS
 gem 'foundation-rails'
 
+# Use Puma for production
+group :production do
+  gem 'puma'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
