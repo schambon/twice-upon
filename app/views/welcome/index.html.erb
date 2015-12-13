@@ -1,11 +1,25 @@
 <% content_for :title, @counter.name + " counter" %>
 <h2><%= @counter.name %> counter</h2>
-<p>You have logged <%= @events_count %> events today.<% if @last != nil %> The latest event logged in this counter was <%= time_ago_in_words @last.timestamp %> ago.<% end %></p>
-<% if @last == nil or @last.timestamp < @counter.cooldown.minutes.ago %>
-<%= button_to "Add", {action: 'event', user: @user.name, counter: @counter.name}, {class: 'button'} %>
-<% else %>
-<div data-alert class="alert-box info">In cooldown</div>
-<% end %>
+<p>You have logged <%= @events_count %> events today.The latest event logged in this counter was <span id="ago"><%= @last != nil ? time_ago_in_words(@last.timestamp) : "an infinitely long time" %></span> ago.</p>
+
+<%
+if @last == nil or @last.timestamp < @counter.cooldown.minutes.ago
+  btn_cls = "shown"
+  cld_cls = "hidden"
+else
+  btn_cls = "hidden"
+  cld_cls = "shown"
+end
+%>
+
+<%= button_to "New event", {action: 'event', user: @user.name, counter: @counter.name}, {class: ['button', btn_cls], id:'btn'} %>
+<div data-alert class="alert-box warning round <%= cld_cls %>" id="cld">In cooldown</div>
+
 <% if flash[:message] %>
 <div data-alert class="alert-box alert round"><%= flash[:message] %></div>
 <% end %>
+
+<script type="text/javascript">
+var user = "<%= @user.name %>";
+var counter = "<%= @counter.name %>";
+</script>

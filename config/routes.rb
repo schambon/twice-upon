@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post ':user/:counter/event' => 'welcome#event'
 
   get ':user/:counter/export/csv' => 'export#csv'
+  get ':user/:counter/update' => 'welcome#update'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

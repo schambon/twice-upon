@@ -1,3 +1,5 @@
+include ActionView::Helpers::DateHelper
+
 class WelcomeController < ApplicationController
 
   def index
@@ -19,6 +21,17 @@ class WelcomeController < ApplicationController
 
     Event.create(:counter => counter, :timestamp => Time.now)
     redirect_to :action => "index"
+  end
+
+  def update
+    user = User.find_by name: params[:user]
+    counter = Counter.where(user: user, name: params[:counter]).first
+    last = counter.events.last
+
+    cooldown = (last != nil and (last.timestamp > counter.cooldown.minutes.ago))
+    ago = last != nil ? time_ago_in_words(last.timestamp) : "an infinitely long time"
+
+    render json: {:cooldown => cooldown, :ago => ago}
   end
 
 end
