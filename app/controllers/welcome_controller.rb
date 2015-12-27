@@ -5,8 +5,7 @@ class WelcomeController < ApplicationController
   def index
     @user = User.find(1)
     @counter = @user.counters.first
-    @events_count = Event.where(counter: @counter, timestamp: Time.now.midnight..Time.now).count
-    # @events_count = @counter.events.size
+    @events_count = Event.where(counter: @counter, timestamp: (Time.now.midnight + 1.hour)..Time.now).count
     @last = @counter.events.last
   end
 
@@ -28,10 +27,12 @@ class WelcomeController < ApplicationController
     counter = Counter.where(user: user, name: params[:counter]).first
     last = counter.events.last
 
+    events_count = Event.where(counter: counter, timestamp: (Time.now.midnight + 1.hour)..Time.now).count
+
     cooldown = (last != nil and (last.timestamp > counter.cooldown.minutes.ago))
     ago = last != nil ? time_ago_in_words(last.timestamp) : "an infinitely long time"
 
-    render json: {:cooldown => cooldown, :ago => ago}
+    render json: {:cooldown => cooldown, :ago => ago, :events_count => events_count}
   end
 
 end

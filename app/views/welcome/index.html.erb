@@ -1,6 +1,6 @@
 <% content_for :title, @counter.name + " counter" %>
 <h2><%= @counter.name %> counter</h2>
-<p>You have logged <%= @events_count %> events today.The latest event logged in this counter was <span id="ago"><%= @last != nil ? time_ago_in_words(@last.timestamp) : "an infinitely long time" %></span> ago.</p>
+<p>You have logged <span id="events_count"><%= @events_count %></span> events today.The latest event logged in this counter was <span id="ago"><%= @last != nil ? time_ago_in_words(@last.timestamp) : "an infinitely long time" %></span> ago.</p>
 
 <%
 if @last == nil or @last.timestamp < @counter.cooldown.minutes.ago

@@ -15,6 +15,7 @@ update = () ->
         $("#btn").removeClass('hidden').addClass('shown')
         $("#cld").removeClass('shown').addClass('hidden')
       $('#ago').text(data.ago)
+      $('#events_count').text(data.events_count)
     error: (xhr, status, error) ->
       console.error(status, error)
   }
